@@ -321,7 +321,7 @@ class DataSet:
         if wlat: lat /= wlat
         if wlon: lon /= wlon
         if walt: alt /= walt
-        reference = {'latitude': lat, 'longitude': lon, 'altitude': 0}  # Set altitude manually.
+        reference = {'latitude': lat, 'longitude': lon, 'altitude': alt}  # Set altitude manually.
         self.save_reference_lla(reference)
         return reference
 

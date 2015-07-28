@@ -33,9 +33,9 @@ def match(args):
                 gps1 = exifs[im1].get('gps',{})
                 gps2 = exifs[im2].get('gps',{})
                 if gps1 and gps2:
-                    lon1, lat1 = gps1['longitude'], gps1['latitude']
-                    lon2, lat2 = gps2['longitude'], gps2['latitude']
-                    distance = geo.gps_distance([lon1,lat1], [lon2, lat2])
+                    lon1, lat1, alt1 = gps1['longitude'], gps1['latitude'], gps1['altitude']
+                    lon2, lat2, alt2 = gps2['longitude'], gps2['latitude'], gps2['altitude']
+                    distance = geo.gps_distance([lat1, lon1, alt1], [lat2, lon2, alt2])
             if distance > matching_gps_distance:
                 print "Discarding based on GPS distance {0} > {1}".format(distance, matching_gps_distance)
                 continue

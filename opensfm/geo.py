@@ -117,8 +117,8 @@ def gps_distance(latlon_1, latlon_2):
     >>> 19000 < gps_distance(p1, p2) < 20000
     True
     '''
-    x1, y1, z1 = ecef_from_lla(latlon_1[0], latlon_1[1], 0.)
-    x2, y2, z2 = ecef_from_lla(latlon_2[0], latlon_2[1], 0.)
+    x1, y1, z1 = ecef_from_lla(latlon_1[0], latlon_1[1], latlon_1[2])
+    x2, y2, z2 = ecef_from_lla(latlon_2[0], latlon_2[1], latlon_2[2])
 
     dis = np.sqrt((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2)
 

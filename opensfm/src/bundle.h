@@ -629,19 +629,19 @@ class BundleAdjuster {
                                unit_translation_shot_->parameters);
     }
 
-    // for (auto &i : shots_) {
-    //   ceres::CostFunction* cost_function =
-    //       new ceres::AutoDiffCostFunction<GPSPriorError, 3, 6>(
-    //           new GPSPriorError(i.second.gps_position[0],
-    //                             i.second.gps_position[1],
-    //                             i.second.gps_position[2],
-    //                             i.second.gps_dop));
+    // Add GPS blocks
+    for (auto &i : shots_) {
+      ceres::CostFunction* cost_function =
+        new ceres::AutoDiffCostFunction<GPSPriorError, 3, 6>(
+               new GPSPriorError(i.second.gps_x,
+                                 i.second.gps_y,
+                                 i.second.gps_z,
+                                 i.second.gps_dop));
 
-    //   problem.AddResidualBlock(cost_function,
-    //                            NULL,
-    //                            i.second.parameters);
-    // }
-
+       problem.AddResidualBlock(cost_function,
+                                NULL,
+                                i.second.parameters);
+    }
 
     // Solve
     ceres::Solver::Options options;

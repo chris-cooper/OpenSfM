@@ -160,7 +160,8 @@ class EXIF:
 
     def extract_altitude(self):
         if 'GPS GPSAltitude' in self.tags:
-            altitude = eval_frac(self.tags['GPS GPSAltitude'].values[0])
+            sign = -1 if ('GPS GPSAltitudeRef' in self.tags and self.tags['GPS GPSAltitudeRef'].values[0] == 1) else 1
+            altitude = sign * eval_frac(self.tags['GPS GPSAltitude'].values[0])
         else:
             altitude = None
         return altitude
@@ -194,9 +195,10 @@ class EXIF:
         for ts in time_strings:
             if ts in self.tags:
                 s = str(self.tags[ts].values)
-                d = datetime.datetime.strptime(s, '%Y:%m:%d %H:%M:%S')
-                timestamp = (d - datetime.datetime(1970,1,1)).total_seconds()   # Assuming d is in UTC
-                return timestamp
+                if s != '':
+                    d = datetime.datetime.strptime(s, '%Y:%m:%d %H:%M:%S')
+                    timestamp = (d - datetime.datetime(1970,1,1)).total_seconds()   # Assuming d is in UTC
+                    return timestamp
         return 0.0
 
 
