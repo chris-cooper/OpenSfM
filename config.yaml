@@ -73,8 +73,8 @@ bundle_outlier_threshold: 0.006
 save_partial_reconstructions: no
 
 # Params for GPS aligment
-use_altitude_tag: no                  # Use or ignore EXIF altitude tag
-align_method: orientation_prior       # orientation_prior or naive
+use_altitude_tag: yes                 # Use or ignore EXIF altitude tag
+align_method: naive                   # orientation_prior or naive
 align_orientation_prior: horizontal   # horizontal, vertical or no_roll
 
 # Params for navigation graph
@@ -90,4 +90,4 @@ nav_vertical_threshold: 20            # Maximum vertical angle difference in mot
 nav_rotation_threshold: 30            # Maximum general rotation in degrees between cameras for steps 
 
 # Other params
-processes: 1                  # Number of threads to use
+processes: 4                  # Number of threads to use
